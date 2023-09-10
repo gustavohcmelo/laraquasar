@@ -1,57 +1,31 @@
 <template>
-    <Head>
-        <title>Welcome to laravel + quasar</title>
-    </Head>
     <Layout>
         <q-page class="column flex-center">
-            <div class="flex q-gutter-lg">
-                <q-img
-                    width="100px"
-                    src="https://cdn.quasar.dev/logo-v2/svg/logo.svg"
-                    alt="Quasar Logo"
-                />
-                <q-img
-                    width="100px"
-                    src="https://laravel.com/img/logomark.min.svg"
-                    alt="Laravel Logo"
-                />
-            </div>
-
-            <div class="q-mt-xl">
-                <q-btn
-                    color="primary"
-                    dense
-                    round
-                    label="-"
-                    :disable="count === min"
-                    @click="count--"
-                />
-
-                <span class="q-mx-md text-bold">{{ count }}</span>
-
-                <q-btn
-                    color="primary"
-                    dense
-                    round
-                    label="+"
-                    :disable="count === max"
-                    @click="count++"
-                />
-            </div>
-
-            <div class="q-mt-md" style="width: 200px">
-                <q-slider v-model="count" :min="min" :max="max" />
-            </div>
+            <q-card :style="{ width: '500px' }">
+                <q-card-section>
+                    <q-form @submit.prevent="changeName">
+                        <div  class="text-center">
+                            <h3>{{ appStore.appName }}</h3>
+                            <div>
+                                <q-input label="Qual nome deseja ?" filled v-model="newAppName" class="q-mb-md"></q-input>
+                                <q-btn label="salvar nome" @click="changeName" color="primary" class="full-width"></q-btn>
+                            </div>
+                        </div>
+                    </q-form>
+                </q-card-section>
+            </q-card>
         </q-page>
     </Layout>
 </template>
 <script setup>
 import Layout from "../layouts/MainLayout.vue";
-import { ref } from "vue";
-import { Head } from "@inertiajs/vue3";
+import { useAppStore } from "../stories/AppStore";
+import { ref } from 'vue'
 
-const count = ref(0);
+const appStore = useAppStore()
+const newAppName = ref('')
 
-const min = -5;
-const max = 5;
+function changeName() {
+    appStore.changeAppName(newAppName.value)
+}
 </script>

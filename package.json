@@ -17,6 +17,7 @@
     "dependencies": {
         "@inertiajs/vue3": "^1.0.1",
         "@quasar/extras": "^1.15.11",
+        "pinia": "^2.1.6",
         "quasar": "^2.11.6",
         "vue": "^3.2.47"
     }

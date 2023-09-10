@@ -4,9 +4,12 @@ import "quasar/dist/quasar.css";
 
 import {createInertiaApp} from "@inertiajs/vue3";
 import {resolvePageComponent} from "laravel-vite-plugin/inertia-helpers";
+import {createPinia} from "pinia";
 import {Quasar} from "quasar";
 import quasarIconSet from "quasar/icon-set/svg-mdi-v6";
 import {createApp, h} from "vue";
+
+const pinia = createPinia()
 
 createInertiaApp({
   resolve : (name) => resolvePageComponent(
@@ -15,6 +18,7 @@ createInertiaApp({
   setup({el, App, props, plugin}) {
     createApp({render : () => h(App, props)})
         .use(plugin)
+        .use(pinia)
         .use(Quasar, {
           plugins : {}, // import Quasar plugins and add here
           iconSet : quasarIconSet,
