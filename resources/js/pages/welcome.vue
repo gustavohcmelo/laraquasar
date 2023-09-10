@@ -2,13 +2,14 @@
     <Layout>
         <q-page class="column flex-center">
             <q-card :style="{ width: '500px' }">
-                <q-card-section>
+                <q-card-section class="text-center">
                     <q-form @submit.prevent="changeName">
-                        <div  class="text-center">
-                            <h3>{{ appStore.appName }}</h3>
+                        <q-img :src="logoSrcImage" width="100px"></q-img>
+                        <div>
+                            <h3 class="q-mt-none">{{ appStore.appName }}</h3>
                             <div>
-                                <q-input label="Qual nome deseja ?" filled v-model="newAppName" class="q-mb-md"></q-input>
-                                <q-btn label="salvar nome" @click="changeName" color="primary" class="full-width"></q-btn>
+                                <q-input label="Insert the new name" filled v-model="newAppName" class="q-mb-md"></q-input>
+                                <q-btn label="Save Name" @click="changeName" color="primary" class="full-width"></q-btn>
                             </div>
                         </div>
                     </q-form>
@@ -24,8 +25,9 @@ import { ref } from 'vue'
 
 const appStore = useAppStore()
 const newAppName = ref('')
-
+const logoSrcImage = `${import.meta.env.VITE_APP_URL}/images/logo.svg`
 function changeName() {
     appStore.changeAppName(newAppName.value)
+    newAppName.value = ''
 }
 </script>
